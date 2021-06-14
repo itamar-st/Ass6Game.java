@@ -1,0 +1,82 @@
+    /**
+     * blockInit- create all kinds of blocks and add them to the game.
+     *
+     * @param startOfGUI      the frame starting point
+     * @param blockWidth      .
+     * @param blockLength     .
+     * @param borderThickness .
+     * @param cleanWidth      of the borders
+     * @param cleanLength     of the borders
+     */
+    private void blockInit(int startOfGUI, int blockWidth, int blockLength,
+                           int borderThickness, int cleanWidth, int cleanLength) {
+        //init the borders of the game
+        Block ceiling = new Block(new Point(borderThickness, borderThickness), cleanWidth, borderThickness, Color.pink);
+        Block leftWall = new Block(new Point(startOfGUI, borderThickness), borderThickness, cleanLength, Color.pink);
+        Block rightWall = new Block(new Point(cleanWidth, borderThickness), borderThickness, cleanLength, Color.pink);
+        DeathZone deathZone = new DeathZone(new Point(borderThickness, cleanLength),
+                cleanWidth, borderThickness, Color.black);
+        Sprite[] list = {deathZone, ceiling, leftWall, rightWall};
+        // notify when the ball hits the deathzone
+        deathZone.addHitListener(ballRemover);
+        //add the frames to the game
+        for (Sprite w : list) {
+            w.addToGame(this);
+        }
+        //create the blocks in a reversed pyramid shape.
+        for (int j = 1; j <= 6; j++) {
+            // get random colors
+            float hRand = getRandomNumber(1, 359);
+            float sRand = getRandomNumber(80, 99);
+            float bRand = getRandomNumber(30, 60);
+            Color blockColor = Color.getHSBColor(hRand, sRand, bRand);
+            for (int i = 1 + j; i <= 12; i++) {
+                int blocksStartX = 130;
+                int blocksStartY = 150;
+                //create the block and add it to the game
+                Point blockCorner = new Point(blocksStartX + i * blockWidth, blocksStartY + j * blockLength);
+                //create a block that removes the ball
+                int evilBlockRow = 5;
+                int evilBlockColumn = 3;
+                if (i == evilBlockRow && j == evilBlockColumn) {
+                    //add a block that deleting the ball out of the game
+                    DeathZone evilBlock = new DeathZone(blockCorner, blockWidth, blockLength, Color.black);
+                    evilBlock.addHitListener(ballRemover);
+                    evilBlock.addToGame(this);
+                } else {
+                    Block b = new Block(blockCorner, blockWidth, blockLength, blockColor);
+                    b.addToGame(this);
+                    b.addHitListener(blockRemover);
+                    b.addHitListener(score);
+                }
+                blockCounter.increase(1);
+            }
+        }
+    }
+	
+    /**
+     * ballInit- create the balls if the game and add them to the game.
+     */
+    private void ballInit() {
+        //create 3 balls with velocity
+        Point ballCenter1 = new Point(150, 500);
+        int ballRadius = 5;
+        Ball ball1 = new Ball(ballCenter1, ballRadius, Color.BLACK, environment);
+        Velocity v1 = Velocity.fromAngleAndSpeed(250, 5);
+        Point ballCenter2 = new Point(353, 500);
+        Ball ball2 = new Ball(ballCenter2, ballRadius, Color.BLACK, environment);
+        Velocity v2 = Velocity.fromAngleAndSpeed(230, 5);
+        Point ballCenter3 = new Point(353, 500);
+        Ball ball3 = new Ball(ballCenter3, ballRadius, Color.BLACK, environment);
+        Velocity v3 = Velocity.fromAngleAndSpeed(270, 5);
+        ball1.setVelocity(v1);
+        ball2.setVelocity(v2);
+        ball3.setVelocity(v3);
+        //set the number of balls in the ball counter
+        ballsCounter.increase(3);
+
+
+        ball1.addToGame(this);
+        ball2.addToGame(this);
+        ball3.addToGame(this);
+    }
