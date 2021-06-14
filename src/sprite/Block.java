@@ -1,7 +1,7 @@
 package sprite;
 
 import biuoop.DrawSurface;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import gamelogic.HitListener;
 import gamelogic.HitNotifier;
 import geometry.Line;
@@ -156,13 +156,13 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * @param game we added all the info
      */
     @Override
-    public void addToGame(Game game) {
+    public void addToGame(GameLevel game) {
         game.addSprite(this);
         game.addCollidable(this);
     }
 
     @Override
-    public void removeFromGame(Game game) {
+    public void removeFromGame(GameLevel game) {
         game.removeSprite(this);
         game.removeCollidable(this);
     }

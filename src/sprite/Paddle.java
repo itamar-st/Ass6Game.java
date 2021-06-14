@@ -2,7 +2,7 @@ package sprite;
 
 import biuoop.KeyboardSensor;
 import biuoop.DrawSurface;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
@@ -149,12 +149,12 @@ public class Paddle implements Sprite, Collidable {
      *
      * @param g the game we are paying
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addSprite(this);
         g.addCollidable(this);
     }
 
     @Override
-    public void removeFromGame(Game game) {
+    public void removeFromGame(GameLevel game) {
     }
 }

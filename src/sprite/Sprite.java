@@ -1,6 +1,6 @@
 package sprite;
 
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import biuoop.DrawSurface;
 
 /**
@@ -24,12 +24,12 @@ public interface Sprite {
      *
      * @param game the game
      */
-    void addToGame(Game game);
+    void addToGame(GameLevel game);
 
     /**
      * remove the spirit to the game.
      *
      * @param game the game
      */
-    void removeFromGame(Game game);
+    void removeFromGame(GameLevel game);
 }

@@ -11,7 +11,7 @@ import sprite.Block;
  * id: 207497769
  */
 public class BlockRemover implements HitListener {
-    private Game game;
+    private GameLevel game;
     private Counter remainingBlocks;
 
     /**
@@ -20,7 +20,7 @@ public class BlockRemover implements HitListener {
      * @param game          the game we want to remove from.
      * @param removedBlocks the counter of the remaining blocks
      */
-    public BlockRemover(Game game, Counter removedBlocks) {
+    public BlockRemover(GameLevel game, Counter removedBlocks) {
         this.game = game;
         this.remainingBlocks = removedBlocks;
     }

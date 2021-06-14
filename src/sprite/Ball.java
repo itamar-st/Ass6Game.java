@@ -1,11 +1,13 @@
 package sprite;
 
 import biuoop.DrawSurface;
-import gamelogic.Game;
+import gamelogic.GameLevel;
 import gamelogic.GameEnvironment;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
+
+import java.awt.*;
 
 /**
  * Ball.
@@ -112,6 +114,8 @@ public class Ball implements Sprite {
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
         surface.fillCircle(this.getX(), this.getY(), this.getSize());
+        surface.setColor(Color.black);
+        surface.drawCircle(this.getX(), this.getY(), this.getSize());
     }
 
     @Override
@@ -185,12 +189,12 @@ public class Ball implements Sprite {
      *
      * @param game we added all the info to
      */
-    public void addToGame(Game game) {
+    public void addToGame(GameLevel game) {
         game.addSprite(this);
     }
 
     @Override
-    public void removeFromGame(Game game) {
+    public void removeFromGame(GameLevel game) {
         game.removeSprite(this);
     }
 
